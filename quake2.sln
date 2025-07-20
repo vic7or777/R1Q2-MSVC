@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game", "game\game.vcproj", "{8B51671C-AEC8-4642-BBFA-610D0212F232}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quake2", "quake2.vcproj", "{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ref_gl", "ref_gl\ref_gl.vcproj", "{FBD52A37-039F-498A-88B8-AAD280759B8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Dedicated Only|Win32 = Dedicated Only|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B51671C-AEC8-4642-BBFA-610D0212F232}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8B51671C-AEC8-4642-BBFA-610D0212F232}.Debug|Win32.Build.0 = Debug|Win32
+		{8B51671C-AEC8-4642-BBFA-610D0212F232}.Dedicated Only|Win32.ActiveCfg = Debug|Win32
+		{8B51671C-AEC8-4642-BBFA-610D0212F232}.Dedicated Only|Win32.Build.0 = Debug|Win32
+		{8B51671C-AEC8-4642-BBFA-610D0212F232}.Release|Win32.ActiveCfg = Release|Win32
+		{8B51671C-AEC8-4642-BBFA-610D0212F232}.Release|Win32.Build.0 = Release|Win32
+		{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}.Debug|Win32.Build.0 = Debug|Win32
+		{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}.Dedicated Only|Win32.ActiveCfg = Dedicated Only|Win32
+		{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}.Dedicated Only|Win32.Build.0 = Dedicated Only|Win32
+		{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}.Release|Win32.ActiveCfg = Release|Win32
+		{6CFE0BE0-6E5F-4AC4-9A30-3BCBC2B35E30}.Release|Win32.Build.0 = Release|Win32
+		{FBD52A37-039F-498A-88B8-AAD280759B8F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FBD52A37-039F-498A-88B8-AAD280759B8F}.Debug|Win32.Build.0 = Debug|Win32
+		{FBD52A37-039F-498A-88B8-AAD280759B8F}.Dedicated Only|Win32.ActiveCfg = Debug|Win32
+		{FBD52A37-039F-498A-88B8-AAD280759B8F}.Dedicated Only|Win32.Build.0 = Debug|Win32
+		{FBD52A37-039F-498A-88B8-AAD280759B8F}.Release|Win32.ActiveCfg = Release|Win32
+		{FBD52A37-039F-498A-88B8-AAD280759B8F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
