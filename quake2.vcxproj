@@ -63,6 +63,9 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\./build/temp/r1q2/release\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -93,7 +96,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;wsock32.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>./build/binaries/release/dedicated.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>m:\quake2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -137,7 +140,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;wsock32.lib;zlib.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;wsock32.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>./build/binaries/debug/r1q2.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateMapFile>true</GenerateMapFile>
@@ -182,7 +185,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;wsock32.lib;zlib.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;wsock32.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>./build/binaries/release/r1q2.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
