@@ -72,7 +72,7 @@ static menulist_s  		s_finish_box;
 static menuaction_s		s_cancel_action[2];
 static menuaction_s		s_defaults_action[2];
 
-static void DriverCallback( void *unused )
+static void DriverCallback_( void *unused )
 {
 	s_ref_list[!s_current_menu_index].curvalue = s_ref_list[s_current_menu_index].curvalue;
 
@@ -333,7 +333,7 @@ void EXPORT VID_MenuInit( void )
 		s_ref_list[i].generic.name = "driver";
 		s_ref_list[i].generic.x = 0;
 		s_ref_list[i].generic.y = 0;
-		s_ref_list[i].generic.callback = DriverCallback;
+		s_ref_list[i].generic.callback = DriverCallback_;
 		s_ref_list[i].itemnames = refs;
 
 		s_mode_list[i].generic.type = MTYPE_SPINCONTROL;

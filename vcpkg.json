@@ -1,6 +1,10 @@
 {
   "dependencies": [
     "zlib",
-    "minizip"
+    "minizip",
+    {"name": "curl"}
+  ],
+    "overrides": [
+    {"name": "curl", "version": "7.68.0"}
   ]
 }
