@@ -4113,7 +4113,8 @@ void CL_Frame (int msec)
 	//	to decouple various client activities.
 	static int	packet_delta,
 				render_delta,
-				misc_delta = 1000;
+				misc_delta = 1000,
+				input_delta;
 
 	//static int inputCount = 0;
 
@@ -4149,6 +4150,7 @@ void CL_Frame (int msec)
 	packet_delta += msec;
 	render_delta += msec;
 	misc_delta += msec;
+	input_delta += msec;
 
 	//jec - set the frame counters
 	cl.time += msec;
@@ -4195,7 +4197,11 @@ void CL_Frame (int msec)
 	}
 
 	//jec - update the inputs (keybd, mouse, server, etc)
-	CL_RefreshInputs ();
+	if (input_delta > 0)
+	{
+		input_delta = 0;
+		CL_RefreshInputs();
+	}
 
 	if ((send_packet_now && cl_instantpacket->intvalue) || userinfo_modified)
 	{

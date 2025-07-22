@@ -2541,7 +2541,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 					}
 					newtime = Sys_Milliseconds ();
 					time = newtime - oldtime;
-					if (!time)
+					if (0 && !time)
 						Sleep (0);
 					spins ++;
 				} while (0 && time < 1);
