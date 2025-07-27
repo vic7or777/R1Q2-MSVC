@@ -2,6 +2,7 @@
   "dependencies": [
     "zlib",
     "minizip",
-    "curl"
+    "curl",
+    "openal-soft"
   ]
 }
