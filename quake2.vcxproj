@@ -52,16 +52,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">.\./build/binaries/release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">.\./build/temp/dedicated\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">.\build\release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">.\build\release\temp\dedicated\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\./build/binaries/debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\./build/temp/r1q2/debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\build\debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\build\debug\temp\r1q2\</IntDir>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\./build/binaries/release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\./build/temp/r1q2/release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\build\release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\build\release\temp\r1q2\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>r1q2</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Only|Win32'">
+    <TargetName>dedicated</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>r1q2</TargetName>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
@@ -81,7 +90,7 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\./build/binaries/release/quake2.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -92,10 +101,6 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;DEDICATED_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>.\./build/temp/dedicated/quake2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\./build/temp/dedicated/</AssemblerListingLocation>
-      <ObjectFileName>.\./build/temp/dedicated/</ObjectFileName>
-      <ProgramDataBaseFileName>.\./build/temp/dedicated/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -106,19 +111,18 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>./build/binaries/release/dedicated.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>m:\quake2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions>/PDBALTPATH:%_PDB% %(AdditionalOptions)</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <MapFileName>$(IntDir)$(TargetName).map</MapFileName>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\./build/binaries/release/quake2.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -127,7 +131,7 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\./build/binaries/debug/quake2.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -137,10 +141,6 @@
       <MinimalRebuild>true</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\./build/temp/r1q2/debug/quake2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\./build/temp/r1q2/debug/</AssemblerListingLocation>
-      <ObjectFileName>.\./build/temp/r1q2/debug/</ObjectFileName>
-      <ProgramDataBaseFileName>.\./build/temp/r1q2/debug/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -151,20 +151,19 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;wsock32.lib;dxguid.lib;dsound.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>./build/binaries/debug/r1q2.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\./build/temp/r1q2/debug/r1q2.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions>/PDBALTPATH:%_PDB% %(AdditionalOptions)</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <MapFileName>$(IntDir)$(TargetName).map</MapFileName>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\./build/binaries/debug/quake2.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -173,7 +172,7 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\./build/binaries/release/quake2.tlb</TypeLibraryName>
+      <TypeLibraryName>$(IntDir)$(TargetName).tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -184,10 +183,6 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\./build/temp/r1q2/release/quake2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\./build/temp/r1q2/release/</AssemblerListingLocation>
-      <ObjectFileName>.\./build/temp/r1q2/release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\./build/temp/r1q2/release/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -197,7 +192,6 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;wsock32.lib;dxguid.lib;dsound.lib;dinput8.lib;Crypt32.lib;ws2_32.lib;Iphlpapi.lib;Secur32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>./build/binaries/release/r1q2.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -205,10 +199,11 @@
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions>/PDBALTPATH:%_PDB% %(AdditionalOptions)</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <MapFileName>$(IntDir)$(TargetName).map</MapFileName>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\./build/binaries/release/quake2.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
