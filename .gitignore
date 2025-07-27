@@ -418,4 +418,5 @@ FodyWeavers.xsd
 *.msp
 
 **/build/
+**/build_tmp/
 **/vcpkg_installed/
