@@ -423,6 +423,12 @@ extern	cvar_t	*cl_smoothsteps;
 extern	cvar_t	*cl_noskins;
 //extern	cvar_t	*cl_autoskins;
 
+extern	cvar_t	*cl_particles_rocket;
+extern	cvar_t	*cl_particles_grenade;
+extern	cvar_t	*cl_particles_bullet;
+extern	cvar_t	*cl_particles_blaster;
+extern	cvar_t	*cl_particles_blood;
+
 extern	cvar_t	*cl_upspeed;
 extern	cvar_t	*cl_forwardspeed;
 extern	cvar_t	*cl_sidespeed;

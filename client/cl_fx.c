@@ -1626,6 +1626,81 @@ void CL_DiminishingTrail (vec3_t start, vec3_t end, centity_t *old, int flags)
 	}
 }
 
+void CL_DiminishingTrail_BAMPO(vec3_t start, vec3_t end, centity_t* old, int flags)
+{
+	vec3_t		move;
+	vec3_t		vec;
+	float		len;
+	int			j;
+	cparticle_t* p;
+	float		dec;
+	float		orgscale;
+	float		velscale;
+	float		time;
+
+	time = (float)cl.time;
+
+	FastVectorCopy(*start, move);
+	VectorSubtract(end, start, vec);
+	len = VectorNormalize(vec);
+
+	dec = 1;
+	VectorScale(vec, dec, vec);
+
+	if (old->trailcount > 900)
+	{
+		orgscale = 3;
+		velscale = 15;
+	}
+	else if (old->trailcount > 800)
+	{
+		orgscale = 2;
+		velscale = 10;
+	}
+	else
+	{
+		orgscale = 1;
+		velscale = 5;
+	}
+
+	while (FLOAT_GT_ZERO(len))
+	{
+		len -= dec;
+
+		if (!free_particles)
+			return;
+
+		// drop less particles as it flies
+		if ((randomMT() & 1023) < old->trailcount)
+		{
+			p = free_particles;
+			free_particles = p->next;
+			p->next = active_particles;
+			active_particles = p;
+			VectorClear(p->accel);
+
+			p->type = PT_NONE;
+			p->time = time;
+
+
+			p->alpha = 1.0;
+			p->alphavel = -1.0f / (1 + frand() * 0.2f);
+			p->color = 0xd0 + (randomMT() & 3);
+			for (j = 0; j < 3; j++)
+			{
+				p->org[j] = move[j];
+				p->vel[j] = 0;
+			}
+			p->accel[2] = 0;
+		}
+
+		old->trailcount -= 5;
+		if (old->trailcount < 100)
+			old->trailcount = 100;
+		VectorAdd(move, vec, move);
+	}
+}
+
 void MakeNormalVectors (vec3_t forward, vec3_t right, vec3_t up)
 {
 	float		d;
@@ -1700,6 +1775,56 @@ void CL_RocketTrail (vec3_t start, vec3_t end, centity_t *old)
 			p->accel[2] = -PARTICLE_GRAVITY;
 		}
 		VectorAdd (move, vec, move);
+	}
+}
+
+// BAMPO  - green rocket trail
+void CL_RocketTrail_BAMPO(vec3_t start, vec3_t end, centity_t* old)
+{
+
+	vec3_t		move;
+	vec3_t		vec;
+	float		len;
+	int			j;
+	cparticle_t* p;
+	float		time;
+
+	time = (float)cl.time;
+
+
+	// fire
+	VectorCopy(start, move);
+	VectorSubtract(end, start, vec);
+	len = VectorNormalize(vec);
+
+	while (len > 0)
+	{
+		len -= 1;
+
+		if (!free_particles)
+			return;
+
+		if ((randomMT() & 5) == 0)
+		{
+			p = free_particles;
+			free_particles = p->next;
+			p->next = active_particles;
+			active_particles = p;
+
+			VectorClear(p->accel);
+			p->time = time;
+
+			p->alpha = 1.0;
+			p->alphavel = -1.0f / (1 + frand() * 0.2f);
+			p->color = 0xd0 + (randomMT() & 3);
+			for (j = 0; j < 3; j++)
+			{
+				p->org[j] = move[j];
+				p->vel[j] = 0;
+			}
+			p->accel[2] = 0;
+		}
+		VectorAdd(move, vec, move);
 	}
 }
 

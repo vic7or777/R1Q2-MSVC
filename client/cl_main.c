@@ -95,6 +95,12 @@ cvar_t	*cl_add_lights;
 cvar_t	*cl_add_entities;
 cvar_t	*cl_add_blend;
 
+cvar_t	*cl_particles_blaster;
+cvar_t	*cl_particles_rocket;
+cvar_t	*cl_particles_grenade;
+cvar_t	*cl_particles_bullet;
+cvar_t	*cl_particles_blood;
+
 cvar_t	*cl_shownet;
 cvar_t	*cl_showmiss;
 cvar_t	*cl_showclamp;
@@ -3533,6 +3539,12 @@ void CL_InitLocal (void)
 	cl_add_entities = Cvar_Get ("cl_entities", "1", 0);
 	cl_gun = Cvar_Get ("cl_gun", "1", CVAR_ARCHIVE);
 	cl_gun->changed = _gun_changed;
+
+	cl_particles_blaster = Cvar_Get("cl_particles_blaster", "3", 0);
+	cl_particles_rocket = Cvar_Get("cl_particles_rocket", "3", 0);
+	cl_particles_grenade = Cvar_Get("cl_particles_grenade", "3", 0);
+	cl_particles_bullet = Cvar_Get("cl_particles_bullet", "15", 0);
+	cl_particles_blood = Cvar_Get("cl_particles_blood", "7", 0);
 
 	cl_footsteps = Cvar_Get ("cl_footsteps", "1", 0);
 	cl_noskins = Cvar_Get ("cl_noskins", "0", 0);
