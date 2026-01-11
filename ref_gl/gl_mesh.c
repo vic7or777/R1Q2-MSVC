@@ -85,6 +85,75 @@ void GL_LerpVerts( int nverts, dtrivertx_t *v, dtrivertx_t *ov, dtrivertx_t *ver
 
 }
 
+///*============================
+//Cellshading from q2max
+//Discoloda's cellshading outline routine
+//=============================*/
+#define DistanceSquared(v1,v2) (((v1)[0]-(v2)[0])*((v1)[0]-(v2)[0])+((v1)[1]-(v2)[1])*((v1)[1]-(v2)[1])+((v1)[2]-(v2)[2])*((v1)[2]-(v2)[2]))
+#define Distance(v1,v2) (sqrt(DistanceSquared(v1,v2)))
+/*============================
+Cellshading from q2max
+Discoloda's cellshading outline routine
+=============================*/
+static void GL_DrawOutLine(const dmdl_t* paliashdr)
+{
+	int* order;
+	float	scale;
+	int		count;
+	int		OUTLINEDROPOFF;
+
+	if (gl_celshading_range->intvalue > 1200)
+		ri.Cvar_SetValue("gl_celshading_range", 1200);
+	if (gl_celshading_range->intvalue < 500)
+		ri.Cvar_SetValue("gl_celshading_range", 500);
+	OUTLINEDROPOFF = gl_celshading_range->intvalue;
+
+	scale = (float)Distance(r_newrefdef.vieworg, currententity->origin) * (r_newrefdef.fov_y / 90.0);
+	scale = (float)(OUTLINEDROPOFF - scale) / OUTLINEDROPOFF;
+
+	if (scale <= 0 || scale >= 1)
+		return;
+
+	if (gl_celshading->value > 12)
+		ri.Cvar_SetValue("gl_celshading", 12);
+	if (gl_celshading->value < 0.5)
+		ri.Cvar_SetValue("gl_celshading", 0);
+
+	order = (int*)((byte*)paliashdr + paliashdr->ofs_glcmds);
+
+	qglPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	qglCullFace(GL_BACK);
+	qglEnable(GL_BLEND);
+	qglColor4f(0, 1, 0, scale);
+	qglLineWidth(gl_celshading->value * scale);
+
+	//Now Draw...
+	for (count = *order++; count; count = *order++)
+	{
+		// get the vertex count and primitive type
+		if (count < 0)
+		{
+			count = -count;
+			qglBegin(GL_TRIANGLE_FAN);
+		}
+		else
+			qglBegin(GL_TRIANGLE_STRIP);
+
+		do
+		{
+			qglVertex3fv(s_lerped[order[2]]);
+			order += 3;
+		} while (--count);
+
+		qglEnd();
+	}
+
+	qglLineWidth(1);
+	qglDisable(GL_BLEND);
+	qglCullFace(GL_FRONT);
+	qglPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 /*
 =============
 GL_DrawAliasFrameLerp
@@ -308,12 +377,19 @@ void GL_DrawAliasFrameLerp (dmdl_t *paliashdr, float backlerp)
 					
 					qglColor4f (l* shadelight[0], l*shadelight[1], l*shadelight[2], alpha);
 					qglVertex3fv (s_lerped[index_xyz]);
+
 				} while (--count);
 			}
 
 			qglEnd ();
 			GL_CheckForError ();
 		}
+	}
+
+
+	if (gl_celshading->intvalue) {
+		if (!(currententity->flags & RF_TRANSLUCENT) && !(r_newrefdef.rdflags & RDF_NOWORLDMODEL))
+			GL_DrawOutLine(paliashdr);
 	}
 
 //	if ( currententity->flags & ( RF_SHELL_RED | RF_SHELL_GREEN | RF_SHELL_BLUE ) )

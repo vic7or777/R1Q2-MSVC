@@ -109,6 +109,9 @@ cvar_t	*gl_ext_multitexture;
 cvar_t	*gl_ext_pointparameters;
 //cvar_t	*gl_ext_compiled_vertex_array;
 
+cvar_t	*gl_celshading;
+cvar_t	*gl_celshading_range;
+
 //r1ch: my extensions
 //cvar_t	*gl_ext_generate_mipmap;
 cvar_t	*gl_ext_point_sprite;
@@ -1383,6 +1386,9 @@ void R_Register( void )
 	
 	//note, pointparams moved to init to handle defaults
 	//gl_ext_compiled_vertex_array = ri.Cvar_Get( "gl_ext_compiled_vertex_array", "1", CVAR_ARCHIVE );
+
+	gl_celshading = ri.Cvar_Get("gl_celshading", "0", CVAR_ARCHIVE);
+	gl_celshading_range = ri.Cvar_Get("gl_celshading_range", "700", CVAR_ARCHIVE);
 
 	//r1ch: my extensions
 	//gl_ext_generate_mipmap = ri.Cvar_Get ("gl_ext_generate_mipmap", "0", 0);

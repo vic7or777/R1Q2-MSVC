@@ -215,6 +215,9 @@ extern cvar_t	*gl_ext_multitexture;
 extern cvar_t	*gl_ext_pointparameters;
 //extern cvar_t	*gl_ext_compiled_vertex_array;
 
+extern cvar_t	*gl_celshading;
+extern cvar_t	*gl_celshading_range;
+
 //r1ch: my extensions
 //extern cvar_t	*gl_ext_generate_mipmap;
 extern cvar_t	*gl_ext_point_sprite;
