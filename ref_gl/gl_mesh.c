@@ -85,16 +85,12 @@ void GL_LerpVerts( int nverts, dtrivertx_t *v, dtrivertx_t *ov, dtrivertx_t *ver
 
 }
 
-///*============================
-//Cellshading from q2max
-//Discoloda's cellshading outline routine
-//=============================*/
-#define DistanceSquared(v1,v2) (((v1)[0]-(v2)[0])*((v1)[0]-(v2)[0])+((v1)[1]-(v2)[1])*((v1)[1]-(v2)[1])+((v1)[2]-(v2)[2])*((v1)[2]-(v2)[2]))
-#define Distance(v1,v2) (sqrt(DistanceSquared(v1,v2)))
 /*============================
 Cellshading from q2max
 Discoloda's cellshading outline routine
 =============================*/
+#define DistanceSquared(v1,v2) (((v1)[0]-(v2)[0])*((v1)[0]-(v2)[0])+((v1)[1]-(v2)[1])*((v1)[1]-(v2)[1])+((v1)[2]-(v2)[2])*((v1)[2]-(v2)[2]))
+#define Distance(v1,v2) (sqrt(DistanceSquared(v1,v2)))
 static void GL_DrawOutLine(const dmdl_t* paliashdr)
 {
 	int* order;
@@ -102,9 +98,9 @@ static void GL_DrawOutLine(const dmdl_t* paliashdr)
 	int		count;
 	int		OUTLINEDROPOFF;
 
-	if (gl_celshading_range->intvalue > 1200)
-		ri.Cvar_SetValue("gl_celshading_range", 1200);
-	if (gl_celshading_range->intvalue < 500)
+	if (gl_celshading_range->intvalue > 1500)
+		ri.Cvar_SetValue("gl_celshading_range", 1500);
+	else if (gl_celshading_range->intvalue < 500)
 		ri.Cvar_SetValue("gl_celshading_range", 500);
 	OUTLINEDROPOFF = gl_celshading_range->intvalue;
 
@@ -114,8 +110,8 @@ static void GL_DrawOutLine(const dmdl_t* paliashdr)
 	if (scale <= 0 || scale >= 1)
 		return;
 
-	if (gl_celshading->value > 12)
-		ri.Cvar_SetValue("gl_celshading", 12);
+	if (gl_celshading->value > 10)
+		ri.Cvar_SetValue("gl_celshading", 10);
 	if (gl_celshading->value < 0.5)
 		ri.Cvar_SetValue("gl_celshading", 0);
 
@@ -124,7 +120,10 @@ static void GL_DrawOutLine(const dmdl_t* paliashdr)
 	qglPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	qglCullFace(GL_BACK);
 	qglEnable(GL_BLEND);
-	qglColor4f(0, 1, 0, scale);
+	if (gl_celshading_alpha->value < 0.1)
+		qglColor4f(gl_celshading_red->value, gl_celshading_green->value, gl_celshading_blue->value, scale);
+	else
+		qglColor4f(gl_celshading_red->value, gl_celshading_green->value, gl_celshading_blue->value, gl_celshading_alpha->value);
 	qglLineWidth(gl_celshading->value * scale);
 
 	//Now Draw...

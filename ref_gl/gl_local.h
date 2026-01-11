@@ -217,6 +217,10 @@ extern cvar_t	*gl_ext_pointparameters;
 
 extern cvar_t	*gl_celshading;
 extern cvar_t	*gl_celshading_range;
+extern cvar_t	*gl_celshading_red;
+extern cvar_t	*gl_celshading_green;
+extern cvar_t	*gl_celshading_blue;
+extern cvar_t	*gl_celshading_alpha;
 
 //r1ch: my extensions
 //extern cvar_t	*gl_ext_generate_mipmap;
