@@ -833,7 +833,7 @@ void CL_ParseTEnt (void)
 			Com_Error (ERR_DROP, "CL_ParseTEnt: Insufficient bytes for TE_BLOOD");
 		MSG_ReadPos (&net_message, pos);
 		MSG_ReadDir (&net_message, dir);
-		if ((int)cl_particles_blood->value & 0b001)
+		if (cl_particles_blood->intvalue & 0b001)
 			CL_ParticleEffect (pos, dir, 0xe8, 60);
 		CL_Gibs (pos);
 		break;
@@ -847,12 +847,12 @@ void CL_ParseTEnt (void)
 		MSG_ReadDir (&net_message, dir);
 		if (type == TE_GUNSHOT)
 		{
-			if ((int)cl_particles_bullet->value & 0b0010) // cg/mg
+			if (cl_particles_bullet->intvalue & 0b0010) // cg/mg
 				CL_ParticleEffect(pos, dir, 0, 40);
 		}
 		else
 		{
-			if ((int)cl_particles_blood->value & 0b100) // armor damage
+			if (cl_particles_blood->intvalue & 0b100) // armor damage
 				CL_ParticleEffect(pos, dir, 0xe0, 6);
 		}
 
@@ -892,7 +892,7 @@ void CL_ParseTEnt (void)
 			Com_Error (ERR_DROP, "CL_ParseTEnt: Insufficient bytes for TE_SHOTGUN");
 		MSG_ReadPos (&net_message, pos);
 		MSG_ReadDir (&net_message, dir);
-		if ((int)cl_particles_bullet->value & 0b0001) // sg/ssg
+		if (cl_particles_bullet->intvalue & 0b0001) // sg/ssg
 			CL_ParticleEffect (pos, dir, 0, 20);
 		CL_SmokeAndFlash(pos);
 		break;
@@ -908,7 +908,7 @@ void CL_ParseTEnt (void)
 			color = 0x00;
 		else
 			color = splash_color[r];
-		if ((int)cl_particles_bullet->value & 0b0100) // sg/ssg/mg/cg
+		if (cl_particles_bullet->intvalue & 0b0100) // sg/ssg/mg/cg
 			CL_ParticleEffect (pos, dir, color, cnt);
 
 		if (r == SPLASH_SPARKS)
@@ -947,7 +947,7 @@ void CL_ParseTEnt (void)
 			Com_Error (ERR_DROP, "CL_ParseTEnt: Insufficient bytes for TE_BLASTER");
 		MSG_ReadPos (&net_message, pos);
 		MSG_ReadDir (&net_message, dir);
-		if ((int)cl_particles_blaster->value & 0b10) // bl/hpb
+		if (cl_particles_blaster->intvalue & 0b10) // bl/hpb
 			CL_BlasterParticles (pos, dir);
 
 		ex = CL_AllocExplosion ();
@@ -1032,7 +1032,7 @@ void CL_ParseTEnt (void)
 		ex->frames = 19;
 		ex->baseframe = 30;
 		ex->ent.angles[1] = (float)(randomMT() % 360);
-		if ((int)cl_particles_grenade->value & 0b010)
+		if (cl_particles_grenade->intvalue & 0b010)
 			CL_ExplosionParticles (pos);
 		if (type == TE_GRENADE_EXPLOSION_WATER)
 			S_StartSound (pos, 0, 0, cl_sfx_watrexp, 1, ATTN_NORM, 0);
@@ -1099,7 +1099,7 @@ void CL_ParseTEnt (void)
 		if (frand() < 0.5f)
 			ex->baseframe = 15;
 		ex->frames = 15;
-		if ((type != TE_EXPLOSION1_BIG) && (type != TE_EXPLOSION1_NP) && ((int)cl_particles_rocket->value & 0b010))		// PMM
+		if ((type != TE_EXPLOSION1_BIG) && (type != TE_EXPLOSION1_NP) && (cl_particles_rocket->intvalue & 0b010))		// PMM
 			CL_ExplosionParticles (pos);									// PMM
 		if (type == TE_ROCKET_EXPLOSION_WATER)
 			S_StartSound (pos, 0, 0, cl_sfx_watrexp, 1, ATTN_NORM, 0);
@@ -1148,7 +1148,7 @@ void CL_ParseTEnt (void)
 			Com_Error (ERR_DROP, "CL_ParseTEnt: Insufficient bytes for TE_BUBBLETRAIL");
 		MSG_ReadPos (&net_message, pos);
 		MSG_ReadPos (&net_message, pos2);
-		if ((int)cl_particles_bullet->value & 0b1000)
+		if (cl_particles_bullet->intvalue & 0b1000)
 			CL_BubbleTrail (pos, pos2);
 		break;
 
