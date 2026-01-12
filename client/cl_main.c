@@ -97,7 +97,9 @@ cvar_t	*cl_add_blend;
 
 cvar_t	*cl_particles_blaster;
 cvar_t	*cl_particles_rocket;
+cvar_t	*cl_particles_rocket_track;
 cvar_t	*cl_particles_grenade;
+cvar_t	*cl_particles_grenade_track;
 cvar_t	*cl_particles_bullet;
 cvar_t	*cl_particles_blood;
 
@@ -3542,7 +3544,9 @@ void CL_InitLocal (void)
 
 	cl_particles_blaster = Cvar_Get("cl_particles_blaster", "3", 0);
 	cl_particles_rocket = Cvar_Get("cl_particles_rocket", "3", 0);
+	cl_particles_rocket_track = Cvar_Get("cl_particles_rocket_track", "0", 0);
 	cl_particles_grenade = Cvar_Get("cl_particles_grenade", "3", 0);
+	cl_particles_grenade_track = Cvar_Get("cl_particles_grenade_track", "0", 0);
 	cl_particles_bullet = Cvar_Get("cl_particles_bullet", "15", 0);
 	cl_particles_blood = Cvar_Get("cl_particles_blood", "7", 0);
 

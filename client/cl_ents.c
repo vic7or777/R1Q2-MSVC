@@ -2091,7 +2091,7 @@ lerp_time;*/
 			{
 				if (cl_particles_rocket->intvalue & 0b001)
 					CL_RocketTrail(cent->lerp_origin, ent.origin, cent);
-				if (cl_particles_rocket->intvalue & 0b100)
+				if (cl_particles_rocket_track->intvalue)
 					CL_RocketTrail_BAMPO(cent->lerp_origin, ent.origin, cent);
 				if (cl_original_dlights->intvalue)
 					V_AddLight (ent.origin, 200, 1, 1, 0);
@@ -2138,7 +2138,7 @@ lerp_time;*/
 			{
 				if (cl_particles_grenade->intvalue & 0b001)
 					CL_DiminishingTrail (cent->lerp_origin, ent.origin, cent, effects);
-				if (cl_particles_grenade->intvalue & 0b100)
+				if (cl_particles_grenade_track->intvalue)
 					CL_DiminishingTrail_BAMPO(cent->lerp_origin, ent.origin, cent, effects);
 			}
 			else if (effects & EF_FLIES)

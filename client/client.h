@@ -424,7 +424,9 @@ extern	cvar_t	*cl_noskins;
 //extern	cvar_t	*cl_autoskins;
 
 extern	cvar_t	*cl_particles_rocket;
+extern	cvar_t	*cl_particles_rocket_track;
 extern	cvar_t	*cl_particles_grenade;
+extern	cvar_t	*cl_particles_grenade_track;
 extern	cvar_t	*cl_particles_bullet;
 extern	cvar_t	*cl_particles_blaster;
 extern	cvar_t	*cl_particles_blood;

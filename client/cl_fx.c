@@ -1685,7 +1685,7 @@ void CL_DiminishingTrail_BAMPO(vec3_t start, vec3_t end, centity_t* old, int fla
 
 			p->alpha = 1.0;
 			p->alphavel = -1.0f / (1 + frand() * 0.2f);
-			p->color = 0xd0 + (randomMT() & 3);
+			p->color = (cl_particles_grenade_track->intvalue + (randomMT() & 3)) & 0xff;
 			for (j = 0; j < 3; j++)
 			{
 				p->org[j] = move[j];
@@ -1816,7 +1816,7 @@ void CL_RocketTrail_BAMPO(vec3_t start, vec3_t end, centity_t* old)
 
 			p->alpha = 1.0;
 			p->alphavel = -1.0f / (1 + frand() * 0.2f);
-			p->color = 0xd0 + (randomMT() & 3);
+			p->color = (cl_particles_rocket_track->intvalue + (randomMT() & 3)) & 0xff;
 			for (j = 0; j < 3; j++)
 			{
 				p->org[j] = move[j];
